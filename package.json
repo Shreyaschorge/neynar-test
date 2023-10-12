@@ -1,5 +1,5 @@
 {
-  "name": "@neynar/test",
+  "name": "neynar-test",
   "version": "0.0.1",
   "description": "Test sdk for neynar",
   "main": "./build/index.js",
