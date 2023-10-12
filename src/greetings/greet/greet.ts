@@ -2,6 +2,7 @@
 
 export class Greetings {
     constructor(public name: string) {
+        console.log("------------- Welcome! -------------");
     }
 
     sayHello() {
