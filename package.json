@@ -1,6 +1,6 @@
 {
   "name": "neynar-test",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Test sdk for neynar",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

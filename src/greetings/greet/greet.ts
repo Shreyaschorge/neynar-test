@@ -10,12 +10,12 @@ export class Greetings {
     }
 
     sayHello() {
-        console.log(`Hello 🙋‍♀️ ${this.name}...!!!\nIts good to see you here.\n`)
+        console.log(`\nHello 🙋‍♀️ ${this.name}...!!!\nIts good to see you here.\n`)
         console.log("------------------------------------");
     }
 
     sayHi() {
-        console.log(`Hi 🙋 ${this.name}...!!!\nIts good to see you here.\n`)
+        console.log(`\nHi 🙋 ${this.name}...!!!\nIts good to see you here.\n`)
         console.log("------------------------------------");
     }
 
