@@ -14,6 +14,7 @@
   "author": "neynar",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.8.4",
     "del-cli": "^5.1.0",
     "typescript": "^5.2.2"
   }
