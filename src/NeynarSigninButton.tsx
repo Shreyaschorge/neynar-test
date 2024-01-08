@@ -9,7 +9,7 @@ export const NeynarSigninButton = ({ onPress }: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.signInButton}>
       <Image
-        source={require("path-to-your-image/favicon.png")} // Make sure to adjust the path
+        source={require("./assets/light-logo.png")}
         style={styles.logo}
       />
       <Text style={styles.signInText}>Sign in with Neynar</Text>
