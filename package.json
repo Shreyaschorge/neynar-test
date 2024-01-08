@@ -1,6 +1,6 @@
 {
   "name": "neynar-test",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Test SIWN Button",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "clean": "del-cli ./build/*",
-    "build": "yarn run clean && tsc"
+    "build": "yarn run clean && tsc && cp -R assets/ build/assets/"
   },
   "author": "Neynar",
   "license": "MIT",
