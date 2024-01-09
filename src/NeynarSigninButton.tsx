@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 export const NeynarSigninButton = ({ onPress }: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.signInButton}>
-      <NeynarLogo width="40px" height="40px" />
+      <NeynarLogo />
       <Text style={styles.signInText}>Sign in with Neynar</Text>
     </TouchableOpacity>
   );
