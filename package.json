@@ -1,6 +1,6 @@
 {
   "name": "neynar-test",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Test SIWN Button",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
