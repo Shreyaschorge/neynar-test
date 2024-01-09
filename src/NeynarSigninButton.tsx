@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     minWidth: 218,
     width: 218,
   },
-  logo: { marginRight: 10 },
+  logo: { marginRight: 40 },
   signInText: { fontSize: 16, fontWeight: "300" },
 });
