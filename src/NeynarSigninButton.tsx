@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, StyleSheet } from "react-native";
+import NeynarLogo from "./components/NeynarLogo";
 
 interface Props {
   onPress: () => void;
@@ -8,7 +9,7 @@ interface Props {
 export const NeynarSigninButton = ({ onPress }: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.signInButton}>
-      <Image source={require("./assets/light-logo.png")} style={styles.logo} />
+      <NeynarLogo style={styles.logo} width="40px" height="40px" />
       <Text style={styles.signInText}>Sign in with Neynar</Text>
     </TouchableOpacity>
   );
@@ -27,6 +28,6 @@ const styles = StyleSheet.create({
     minWidth: 218,
     width: 218,
   },
-  logo: { width: 24, height: 24, marginRight: 10 },
+  logo: { marginRight: 10 },
   signInText: { fontSize: 16, fontWeight: "300" },
 });
