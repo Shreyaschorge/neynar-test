@@ -11,8 +11,9 @@
     "sourceMap": true,
     "outDir": "build",
     "rootDir": "src",
-    "skipLibCheck": true
+    "types": ["react", "react-native"]
   },
+
   "include": ["src"],
   "exclude": ["node_modules"]
 }
