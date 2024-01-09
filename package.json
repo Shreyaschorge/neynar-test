@@ -1,27 +1,35 @@
 {
   "name": "neynar-test",
   "version": "0.1.5",
-  "description": "Test SIWN Button",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
-  "files": [
-    "build/**/*"
+  "keywords": [
+    "react-native",
+    "expo",
+    "barometer",
+    "air pressure",
+    "rn-barometer"
   ],
-  "scripts": {
-    "clean": "del-cli ./build/*",
-    "build": "yarn run clean && tsc"
-  },
-  "author": "Neynar",
+  "author": "",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "yarn run build"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "devDependencies": {
-    "del-cli": "^5.1.0",
-    "@types/node": "^20.8.4",
-    "@types/react": "^18.2.47",
-    "@babel/core": "^7.20.0",
-    "typescript": "^5.2.2"
+    "@types/react": "^16.9.56",
+    "@types/react-native": "^0.63.35",
+    "react-native-unimodules": "^0.11.0",
+    "typescript": "^4.0.5"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-native": "^0.73.1"
+    "expo-sensors": "^9.1.0"
   }
 }
