@@ -28,5 +28,5 @@ const styles = StyleSheet.create({
     minWidth: 218,
     width: 218,
   },
-  signInText: { fontSize: 16, fontWeight: "300", marginLeft: 20 },
+  signInText: { fontSize: 16, fontWeight: "300", marginLeft: 10 },
 });
