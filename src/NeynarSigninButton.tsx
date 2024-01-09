@@ -1,17 +1,28 @@
 import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
+import WebView from "react-native-webview";
 
-interface Props {
-  onPress: () => void;
-}
+export const NeynarSigninButton = () => {
+  const [showWebView, setShowWebView] = React.useState(false);
 
-export const NeynarSigninButton = ({ onPress }: Props) => {
+  const openWebView = () => {
+    setShowWebView(true);
+  };
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.signInButton}>
-      <NeynarLogo />
-      <Text style={styles.signInText}>Sign in with Neynar</Text>
-    </TouchableOpacity>
+    <>
+      <TouchableOpacity onPress={openWebView} style={styles.signInButton}>
+        <NeynarLogo />
+        <Text style={styles.signInText}>Sign in with Neynar</Text>
+      </TouchableOpacity>
+      {showWebView && (
+        <WebView
+          source={{ uri: "https://reactnative.dev/" }}
+          style={{ flex: 1 }}
+        />
+      )}
+    </>
   );
 };
 
