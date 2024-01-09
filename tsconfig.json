@@ -11,7 +11,7 @@
     "sourceMap": true,
     "outDir": "build",
     "rootDir": "src",
-    "types": ["react", "react-native", "node"]
+    "types": ["react", "react-native"]
   },
 
   "include": ["src"],
