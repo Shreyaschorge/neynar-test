@@ -1,6 +1,6 @@
 {
   "name": "neynar-test",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "keywords": [
     "react-native",
     "expo",
@@ -21,6 +21,7 @@
     "build/**/*"
   ],
   "devDependencies": {
+    "@types/node": "^20.10.7",
     "@types/react": "^18.2.47",
     "@types/react-native": "^0.73.0",
     "del-cli": "^5.1.0",
@@ -32,7 +33,6 @@
     "react-native": "*"
   },
   "dependencies": {
-    "@types/node": "^20.10.7",
     "expo-sensors": "^12.5.0"
   }
 }
