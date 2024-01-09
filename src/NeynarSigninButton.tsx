@@ -9,7 +9,7 @@ interface Props {
 export const NeynarSigninButton = ({ onPress }: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.signInButton}>
-      <NeynarLogo style={styles.logo} width="40px" height="40px" />
+      <NeynarLogo width="40px" height="40px" />
       <Text style={styles.signInText}>Sign in with Neynar</Text>
     </TouchableOpacity>
   );
@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     marginBottom: 24,
+    marginLeft: 20,
     minWidth: 218,
     width: 218,
   },
-  logo: { marginRight: 40 },
   signInText: { fontSize: 16, fontWeight: "300" },
 });
