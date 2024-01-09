@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "clean": "del-cli ./build/*",
-    "build": "yarn run clean && tsc && cp -R assets/ build/assets/"
+    "build": "yarn run clean && tsc"
   },
   "author": "Neynar",
   "license": "MIT",
