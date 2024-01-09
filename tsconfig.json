@@ -9,7 +9,7 @@
     "strict": true,
     "target": "esnext",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "build",
     "rootDir": "src",
     "skipLibCheck": true
   },

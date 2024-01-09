@@ -11,16 +11,18 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "clean": "del-cli ./build/*",
+    "build": "yarn run clean && tsc && cp -R assets/ build/assets/",
     "prepare": "yarn run build"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "files": [
-    "dist/**/*"
+    "build/**/*"
   ],
   "devDependencies": {
     "@types/node": "^20.10.7",
+    "del-cli": "^5.1.0",
     "@types/react": "^18.2.47",
     "@types/react-native": "^0.73.0",
     "react-native-unimodules": "^0.14.10",
