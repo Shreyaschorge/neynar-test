@@ -29,11 +29,11 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-webview": "*"
   },
   "dependencies": {
     "expo-sensors": "^12.5.0",
-    "react-native-svg": "^14.1.0",
-    "react-native-webview": "^13.6.4"
+    "react-native-svg": "^14.1.0"
   }
 }

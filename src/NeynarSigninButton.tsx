@@ -1,13 +1,13 @@
-import React from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
 import WebView from "react-native-webview";
 
 export const NeynarSigninButton = () => {
-  const [showWebView, setShowWebView] = React.useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const openWebView = () => {
-    setShowWebView(true);
+    setModalVisible(true);
   };
 
   return (
@@ -16,12 +16,22 @@ export const NeynarSigninButton = () => {
         <NeynarLogo />
         <Text style={styles.signInText}>Sign in with Neynar...</Text>
       </TouchableOpacity>
-      {showWebView && (
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
         <WebView
-          source={{ uri: "https://reactnative.dev/" }}
-          style={{ flex: 1, height: "100%", width: "100%", zIndex: 1000 }}
+          source={{ uri: "https://www.google.com" }}
+          style={{ marginTop: 20 }}
+          onNavigationStateChange={(navState) => {
+            if (!navState.loading) {
+              setModalVisible(false);
+            }
+          }}
         />
-      )}
+      </Modal>
     </>
   );
 };
