@@ -23,7 +23,9 @@ export const NeynarSigninButton = () => {
         onRequestClose={() => setModalVisible(false)}
       >
         <WebView
-          source={{ uri: "https://www.google.com" }}
+          source={{
+            uri: "https://app.neynar.com/login?client_id=a1092b41-629f-45e0-b196-b3ff3a8f193f",
+          }}
           style={{ marginTop: 20 }}
           onNavigationStateChange={(navState) => {
             if (!navState.loading) {
