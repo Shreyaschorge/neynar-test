@@ -3,6 +3,13 @@ import { Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
 import WebView from "react-native-webview";
 
+// interface Props {
+//   // clientId: string;
+//   // neynarLoginUrl: string;
+//   // redirectUri?: string;
+//   onSignInSuccess: (data: any) => void;
+// }
+
 export const NeynarSigninButton = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -10,13 +17,44 @@ export const NeynarSigninButton = () => {
     setModalVisible(true);
   };
 
+  const handleNavigationStateChange = (newNavState: any) => {
+    const { url } = newNavState;
+
+    console.log("url and newState", url, newNavState);
+
+    // onSignInSuccess(url);
+
+    // // Define your success condition here. Example:
+    // if (url.includes("your-success-condition")) {
+    //   setModalVisible(false);
+    //   // Call onSignInSuccess with any data you need to pass
+
+    // }
+    // Handle other conditions as necessary
+  };
+
   return (
     <>
       <TouchableOpacity onPress={openWebView} style={styles.signInButton}>
         <NeynarLogo />
-        <Text style={styles.signInText}>Sign in with Neynar...</Text>
+        <Text style={styles.signInText}>Sign in with Neynar</Text>
       </TouchableOpacity>
-      <Modal
+      {modalVisible && (
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <WebView
+            source={{
+              uri: "https://app.neynar.com/login?client_id=a1092b41-629f-45e0-b196-b3ff3a8f193f",
+            }} // Adjust as needed
+            onNavigationStateChange={handleNavigationStateChange}
+          />
+        </Modal>
+      )}
+      {/* <Modal
         animationType="slide"
         transparent={false}
         visible={modalVisible}
@@ -33,7 +71,7 @@ export const NeynarSigninButton = () => {
             }
           }}
         />
-      </Modal>
+      </Modal> */}
     </>
   );
 };
