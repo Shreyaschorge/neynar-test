@@ -1,36 +1,37 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
-import WebView from "react-native-webview";
+import WebView, { WebViewMessageEvent } from "react-native-webview";
 
-// interface Props {
-//   // clientId: string;
-//   // neynarLoginUrl: string;
-//   // redirectUri?: string;
-//   onSignInSuccess: (data: any) => void;
-// }
+interface Props {
+  // clientId: string;
+  // neynarLoginUrl: string;
+  // redirectUri?: string;
+  onSignInSuccess: (data: any) => void;
+}
 
-export const NeynarSigninButton = () => {
+export const NeynarSigninButton = ({ onSignInSuccess }: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const openWebView = () => {
     setModalVisible(true);
   };
 
-  const handleNavigationStateChange = (newNavState: any) => {
-    const { url } = newNavState;
+  const handleMessage = (event: WebViewMessageEvent) => {
+    let data;
+    try {
+      data = JSON.parse(event.nativeEvent.data);
+    } catch (e) {
+      console.error("Failed to parse message from webview:", e);
+      return;
+    }
 
-    console.log("url and newState", url, newNavState);
+    console.log("event data", data);
 
-    // onSignInSuccess(url);
-
-    // // Define your success condition here. Example:
-    // if (url.includes("your-success-condition")) {
-    //   setModalVisible(false);
-    //   // Call onSignInSuccess with any data you need to pass
-
-    // }
-    // Handle other conditions as necessary
+    if (data.is_authenticated) {
+      setModalVisible(false);
+      onSignInSuccess(data);
+    }
   };
 
   return (
@@ -49,11 +50,8 @@ export const NeynarSigninButton = () => {
           <WebView
             source={{
               uri: "https://app.neynar.com/login?client_id=a1092b41-629f-45e0-b196-b3ff3a8f193f",
-            }} // Adjust as needed
-            onNavigationStateChange={handleNavigationStateChange}
-            onMessage={(event) => {
-              console.log("event", event.nativeEvent.data);
             }}
+            onMessage={handleMessage}
           />
         </Modal>
       )}
