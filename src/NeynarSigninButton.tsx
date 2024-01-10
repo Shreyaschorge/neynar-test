@@ -14,12 +14,12 @@ export const NeynarSigninButton = () => {
     <>
       <TouchableOpacity onPress={openWebView} style={styles.signInButton}>
         <NeynarLogo />
-        <Text style={styles.signInText}>Sign in with Neynar</Text>
+        <Text style={styles.signInText}>Sign in with Neynar...</Text>
       </TouchableOpacity>
       {showWebView && (
         <WebView
           source={{ uri: "https://reactnative.dev/" }}
-          style={{ flex: 1 }}
+          style={{ flex: 1, height: "100%", width: "100%", zIndex: 1000 }}
         />
       )}
     </>
