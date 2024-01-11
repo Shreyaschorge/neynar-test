@@ -1,37 +1,13 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
-import WebView, { WebViewMessageEvent } from "react-native-webview";
+import WebView from "react-native-webview";
 
-interface Props {
-  // clientId: string;
-  // neynarLoginUrl: string;
-  // redirectUri?: string;
-  onSignInSuccess: (data: any) => void;
-}
-
-export const NeynarSigninButton = ({ onSignInSuccess }: Props) => {
+export const NeynarSigninButton = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const openWebView = () => {
     setModalVisible(true);
-  };
-
-  const handleMessage = (event: WebViewMessageEvent) => {
-    let data;
-    try {
-      data = JSON.parse(event.nativeEvent.data);
-    } catch (e) {
-      console.error("Failed to parse message from webview:", e);
-      return;
-    }
-
-    console.log("event data", data);
-
-    if (data.is_authenticated) {
-      setModalVisible(false);
-      onSignInSuccess(data);
-    }
   };
 
   return (
@@ -51,28 +27,20 @@ export const NeynarSigninButton = ({ onSignInSuccess }: Props) => {
             source={{
               uri: "https://app.neynar.com/login?client_id=a1092b41-629f-45e0-b196-b3ff3a8f193f",
             }}
-            onMessage={handleMessage}
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
+            userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+            originWhitelist={["*"]}
+            mixedContentMode="compatibility"
+            allowsInlineMediaPlayback={true}
+            mediaPlaybackRequiresUserAction={false}
+            allowFileAccess={true}
+            scalesPageToFit={true}
+            startInLoadingState={true}
+            onNavigationStateChange={(navState) => console.log(navState)}
           />
         </Modal>
       )}
-      {/* <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <WebView
-          source={{
-            uri: "https://app.neynar.com/login?client_id=a1092b41-629f-45e0-b196-b3ff3a8f193f",
-          }}
-          style={{ marginTop: 20 }}
-          onNavigationStateChange={(navState) => {
-            if (!navState.loading) {
-              setModalVisible(false);
-            }
-          }}
-        />
-      </Modal> */}
     </>
   );
 };
