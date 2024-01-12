@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Modal,
-} from "react-native";
+import { Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
 import WebView, { WebViewMessageEvent } from "react-native-webview";
 
@@ -22,14 +17,14 @@ export const NeynarSigninButton = ({ apiKey, clientId }: Props) => {
     console.log("Received data:", data);
   };
 
-  const injectedJavaScript = `
-    if (window.opener && window.opener.postMessage) {
-      window.originalPostMessage = window.opener.postMessage;
-      window.opener.postMessage = (message, targetOrigin, transfer) => {
-        window.postMessage(message, targetOrigin);
-      };
-    }
-  `;
+  // const injectedJavaScript = `
+  //   if (window.opener && window.opener.postMessage) {
+  //     window.originalPostMessage = window.opener.postMessage;
+  //     window.opener.postMessage = (message, targetOrigin, transfer) => {
+  //       window.postMessage(message, targetOrigin);
+  //     };
+  //   }
+  // `;
 
   const handleOnPress = async () => {
     try {
@@ -71,7 +66,7 @@ export const NeynarSigninButton = ({ apiKey, clientId }: Props) => {
               startInLoadingState={true}
               onNavigationStateChange={(navState) => console.log(navState)}
               onMessage={handleMessage}
-              injectedJavaScript={injectedJavaScript}
+              // injectedJavaScript={injectedJavaScript}
             />
           )}
         </Modal>
