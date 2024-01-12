@@ -5,10 +5,21 @@ import WebView from "react-native-webview";
 
 export const NeynarSigninButton = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [webViewUri, setWebViewUri] = useState("https://demo.neynar.com"); // Set initial URL
 
   const openWebView = () => {
     setModalVisible(true);
   };
+
+  const injectedJavaScript = `
+    window.open = function(url, target) {
+      if (target === '_blank') {
+        window.ReactNativeWebView.postMessage(url);
+      } else {
+        window.location.href = url;
+      }
+    };
+  `;
 
   return (
     <>
@@ -24,20 +35,20 @@ export const NeynarSigninButton = () => {
           onRequestClose={() => setModalVisible(false)}
         >
           <WebView
-            source={{
-              uri: "https://app.neynar.com/login?client_id=a1092b41-629f-45e0-b196-b3ff3a8f193f",
-            }}
+            source={{ uri: webViewUri }}
             javaScriptEnabled={true}
             domStorageEnabled={true}
-            userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
-            originWhitelist={["*"]}
-            mixedContentMode="compatibility"
-            allowsInlineMediaPlayback={true}
-            mediaPlaybackRequiresUserAction={false}
-            allowFileAccess={true}
             scalesPageToFit={true}
             startInLoadingState={true}
-            onNavigationStateChange={(navState) => console.log(navState)}
+            injectedJavaScript={injectedJavaScript}
+            onMessage={(event) => {
+              const newUrl = event.nativeEvent.data;
+              setModalVisible(false);
+              setTimeout(() => {
+                setModalVisible(true);
+                setWebViewUri(newUrl);
+              }, 300);
+            }}
           />
         </Modal>
       )}
