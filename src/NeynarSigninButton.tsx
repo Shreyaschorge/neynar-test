@@ -5,18 +5,19 @@ import WebView from "react-native-webview";
 
 export const NeynarSigninButton = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [webViewUri, setWebViewUri] = useState("https://demo.neynar.com"); // Set initial URL
+  const [webViewUri, setWebViewUri] = useState("https://demo.neynar.com");
 
   const openWebView = () => {
     setModalVisible(true);
   };
 
   const injectedJavaScript = `
+    const originalOpen = window.open;
     window.open = function(url, target) {
       if (target === '_blank') {
         window.ReactNativeWebView.postMessage(url);
       } else {
-        window.location.href = url;
+        originalOpen(url, target);
       }
     };
   `;
@@ -38,16 +39,10 @@ export const NeynarSigninButton = () => {
             source={{ uri: webViewUri }}
             javaScriptEnabled={true}
             domStorageEnabled={true}
-            scalesPageToFit={true}
-            startInLoadingState={true}
             injectedJavaScript={injectedJavaScript}
             onMessage={(event) => {
               const newUrl = event.nativeEvent.data;
-              setModalVisible(false);
-              setTimeout(() => {
-                setModalVisible(true);
-                setWebViewUri(newUrl);
-              }, 300);
+              setWebViewUri(newUrl); // Navigate within the same WebView
             }}
           />
         </Modal>
