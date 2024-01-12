@@ -1,30 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
 import WebView from "react-native-webview";
 
-export const NeynarSigninButton = () => {
+interface Props {
+  apiKey: string;
+  clientId: string;
+}
+
+export const NeynarSigninButton = ({ apiKey, clientId }: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [webViewUri, setWebViewUri] = useState("https://demo.neynar.com");
+  const [authUrl, setAuthUrl] = useState<string | null>(null);
 
-  const openWebView = () => {
-    setModalVisible(true);
+  const handleOnPress = async () => {
+    try {
+      const response = await fetch(
+        `https://api.neynar.com/v2/farcaster/login/authorize?api_key=${apiKey}&response_type=code&client_id=${clientId}`
+      );
+
+      if (!response.ok) throw new Error("Something went wrong");
+
+      const json = await response.json();
+      setAuthUrl(json.authorization_url);
+      setModalVisible(true);
+    } catch (err) {
+      console.log(err);
+    }
   };
-
-  const injectedJavaScript = `
-    const originalOpen = window.open;
-    window.open = function(url, target) {
-      if (target === '_blank') {
-        window.ReactNativeWebView.postMessage(url);
-      } else {
-        originalOpen(url, target);
-      }
-    };
-  `;
 
   return (
     <>
-      <TouchableOpacity onPress={openWebView} style={styles.signInButton}>
+      <TouchableOpacity onPress={handleOnPress} style={styles.signInButton}>
         <NeynarLogo />
         <Text style={styles.signInText}>Sign in with Neynar</Text>
       </TouchableOpacity>
@@ -35,16 +41,21 @@ export const NeynarSigninButton = () => {
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
         >
-          <WebView
-            source={{ uri: webViewUri }}
-            javaScriptEnabled={true}
-            domStorageEnabled={true}
-            injectedJavaScript={injectedJavaScript}
-            onMessage={(event) => {
-              const newUrl = event.nativeEvent.data;
-              setWebViewUri(newUrl); // Navigate within the same WebView
-            }}
-          />
+          {authUrl && (
+            <WebView
+              source={{
+                uri: authUrl.replace(
+                  "https://app.neynar.com",
+                  "http://localhost:3000"
+                ),
+              }}
+              javaScriptEnabled={true}
+              domStorageEnabled={true}
+              scalesPageToFit={true}
+              startInLoadingState={true}
+              onNavigationStateChange={(navState) => console.log(navState)}
+            />
+          )}
         </Modal>
       )}
     </>
