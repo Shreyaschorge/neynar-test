@@ -27,15 +27,6 @@ export const NeynarSigninButton = ({
     successCallback(data);
   };
 
-  // const injectedJavaScript = `
-  //   if (window.opener && window.opener.postMessage) {
-  //     window.originalPostMessage = window.opener.postMessage;
-  //     window.opener.postMessage = (message, targetOrigin, transfer) => {
-  //       window.postMessage(message, targetOrigin);
-  //     };
-  //   }
-  // `;
-
   const handleOnPress = async () => {
     try {
       const response = await fetch(
@@ -45,12 +36,7 @@ export const NeynarSigninButton = ({
       if (!response.ok) throw new Error("Something went wrong");
 
       const json = await response.json();
-      setAuthUrl(
-        json.authorization_url.replace(
-          "https://app.neynar.com",
-          "https://34b0-123-108-229-40.ngrok-free.app"
-        )
-      );
+      setAuthUrl(json.authorization_url);
       setModalVisible(true);
     } catch (err) {
       console.log(err);
