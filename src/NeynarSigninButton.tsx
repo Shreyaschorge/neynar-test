@@ -3,18 +3,28 @@ import { Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
 import WebView, { WebViewMessageEvent } from "react-native-webview";
 
-interface Props {
+export interface ISuccessMessage {
+  fid: string;
+  is_authenticated: boolean;
+  signer_uuid: string;
+}
+interface IProps {
   apiKey: string;
   clientId: string;
+  successCallback: (data: ISuccessMessage) => void;
 }
 
-export const NeynarSigninButton = ({ apiKey, clientId }: Props) => {
+export const NeynarSigninButton = ({
+  apiKey,
+  clientId,
+  successCallback,
+}: IProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [authUrl, setAuthUrl] = useState<string | null>(null);
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = JSON.parse(event.nativeEvent.data);
-    console.log("Received data:", data);
+    successCallback(data);
   };
 
   // const injectedJavaScript = `
@@ -35,7 +45,12 @@ export const NeynarSigninButton = ({ apiKey, clientId }: Props) => {
       if (!response.ok) throw new Error("Something went wrong");
 
       const json = await response.json();
-      setAuthUrl(json.authorization_url);
+      setAuthUrl(
+        json.authorization_url.replace(
+          "https://app.neynar.com",
+          "https://34b0-123-108-229-40.ngrok-free.app"
+        )
+      );
       setModalVisible(true);
     } catch (err) {
       console.log(err);
