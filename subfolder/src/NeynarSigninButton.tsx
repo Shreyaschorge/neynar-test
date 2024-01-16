@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import NeynarLogo from "./components/NeynarLogo";
-import WebView, { WebViewMessageEvent } from "react-native-webview";
+import WebView, {
+  WebViewMessageEvent,
+  WebViewNavigation,
+} from "react-native-webview";
 
 export interface ISuccessMessage {
   fid: string;
@@ -12,12 +15,14 @@ interface IProps {
   apiKey: string;
   clientId: string;
   successCallback: (data: ISuccessMessage) => void;
+  errorCallback: (error: any) => void;
 }
 
 export const NeynarSigninButton = ({
   apiKey,
   clientId,
   successCallback,
+  errorCallback,
 }: IProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [authUrl, setAuthUrl] = useState<string | null>(null);
@@ -25,6 +30,7 @@ export const NeynarSigninButton = ({
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = JSON.parse(event.nativeEvent.data);
     successCallback(data);
+    setModalVisible(false);
   };
 
   const handleOnPress = async () => {
@@ -39,7 +45,8 @@ export const NeynarSigninButton = ({
       setAuthUrl(json.authorization_url);
       setModalVisible(true);
     } catch (err) {
-      console.log(err);
+      errorCallback(err);
+      setModalVisible(false);
     }
   };
 
@@ -65,9 +72,10 @@ export const NeynarSigninButton = ({
               domStorageEnabled={true}
               scalesPageToFit={true}
               startInLoadingState={true}
-              onNavigationStateChange={(navState) => console.log(navState)}
+              onNavigationStateChange={(navState: WebViewNavigation) =>
+                console.log(navState)
+              }
               onMessage={handleMessage}
-              // injectedJavaScript={injectedJavaScript}
             />
           )}
         </Modal>

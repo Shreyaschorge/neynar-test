@@ -1,18 +1,17 @@
 {
-  "name": "neynar-test",
-  "version": "0.1.29",
+  "name": "@neynar/react-native-signin",
+  "version": "0.0.0",
   "keywords": [
-    "react-native",
+    "react-native-signin-with-neynar",
     "expo",
-    "barometer",
-    "air pressure",
-    "rn-barometer"
+    "react-native-sign-in-with-neynar",
+    "expo-sign-in-with-neynar"
   ],
-  "author": "",
+  "author": "Neynar",
   "license": "MIT",
   "scripts": {
     "clean": "del-cli ./build/*",
-    "build": "yarn run clean && tsc && cp -R assets/ build/assets/",
+    "build": "yarn run clean && tsc",
     "prepare": "yarn run build"
   },
   "main": "build/index.js",
@@ -34,6 +33,7 @@
   },
   "dependencies": {
     "expo-sensors": "^12.5.0",
-    "react-native-svg": "^14.1.0"
+    "react-native-svg": "^14.1.0",
+    "react-native-webview": "^13.6.4"
   }
 }
