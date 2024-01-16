@@ -10,25 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Ensures tags are also checked out
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "20" # Specify the Node.js version
-          registry-url: "https://registry.npmjs.org/"
-
-      - name: Navigate to Subfolder
-        run: cd subfolder
+          node-version: "20"
 
       - name: Install Dependencies
         run: npm install
+        working-directory: ./subfolder
 
       - name: Build Package
         run: npm run build
+        working-directory: ./subfolder
 
       - name: Publish to npm
         run: npm publish --access public
+        working-directory: ./subfolder
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
