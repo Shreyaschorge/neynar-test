@@ -2,8 +2,8 @@ name: "Publish to NPM"
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 jobs:
   build:
@@ -16,8 +16,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20' # Specify the Node.js version
-          registry-url: 'https://registry.npmjs.org/'
+          node-version: "20" # Specify the Node.js version
+          registry-url: "https://registry.npmjs.org/"
 
       - name: Navigate to Subfolder
         run: cd subfolder
