@@ -18,15 +18,15 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        working-directory: ./subfolder
+        working-directory: ./react
 
       - name: Build Package
         run: npm run build
-        working-directory: ./subfolder
+        working-directory: ./react
 
       - name: Set Config
         run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
 
       - name: Publish to npm
         run: npm publish --access public
-        working-directory: ./subfolder
+        working-directory: ./react
