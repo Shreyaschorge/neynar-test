@@ -19,11 +19,11 @@
     ]
   },
   "peerDependencies": {
-    "@pigment-css/react": "^0.0.9",
-    "hls.js": "^1.5.13",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "swr": "^2.2.5"
+    "@pigment-css/react": "^0.0.30",
+    "hls.js": "^1.5.20",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "swr": "^2.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
@@ -54,12 +54,9 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.10",
     "vite-plugin-dts": "^4.3.0",
-    "vite-tsconfig-paths": "^4.3.2"
-  },
-  "dependencies": {
-    "@storybook/addons": "^7.6.17",
+    "vite-tsconfig-paths": "^4.3.2",
+     "@storybook/addons": "^7.6.17",
     "@storybook/theming": "^8.5.3",
-    "next": "14.2.16",
     "storybook-source-link": "^4.0.1"
   }
 }
