@@ -1,5 +1,5 @@
 {
-  "name": "@neynar/react",
+  "name": "@neynar-test/test",
   "version": "0.10.0",
   "description": "Farcaster frontend component library powered by Neynar",
   "main": "dist/bundle.cjs.js",
@@ -55,7 +55,7 @@
     "vite": "^5.2.10",
     "vite-plugin-dts": "^4.3.0",
     "vite-tsconfig-paths": "^4.3.2",
-     "@storybook/addons": "^7.6.17",
+    "@storybook/addons": "^7.6.17",
     "@storybook/theming": "^8.5.3",
     "storybook-source-link": "^4.0.1"
   }
