@@ -1,5 +1,5 @@
 {
-  "name": "@neynar-test/test",
+  "name": "neynar-test",
   "version": "0.10.0",
   "description": "Farcaster frontend component library powered by Neynar",
   "main": "dist/bundle.cjs.js",
