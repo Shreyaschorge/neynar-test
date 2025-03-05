@@ -17,11 +17,11 @@ jobs:
           node-version: "20"
 
       - name: Install Dependencies
-        run: npm install
+        run: yarn install
         working-directory: ./react
 
       - name: Build Package
-        run: npm run build
+        run: yarn build
         working-directory: ./react
 
       - name: Set Config
